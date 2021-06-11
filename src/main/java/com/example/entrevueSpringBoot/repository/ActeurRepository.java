@@ -6,12 +6,12 @@
 package com.example.entrevueSpringBoot.repository;
 
 import com.example.entrevueSpringBoot.model.Acteur;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author RomaG
  */
-public interface ActeurRepository extends CrudRepository<Acteur, Long>{
+public interface ActeurRepository extends JpaRepository<Acteur, Long>{
     
 }

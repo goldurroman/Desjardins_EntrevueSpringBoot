@@ -10,11 +10,6 @@ import com.example.entrevueSpringBoot.model.Film;
 import com.example.entrevueSpringBoot.repository.FilmRepository;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class FilmService {
+
     private final FilmRepository filmRepository;
     private final ActeurService acteurService;
 
@@ -33,33 +29,31 @@ public class FilmService {
         this.filmRepository = filmRepository;
         this.acteurService = acteurService;
     }
-    
-    public Film addFilm(Film film){
-    return filmRepository.save(film);
+
+    public Film addFilm(Film film) {
+        return filmRepository.save(film);
     }
-    
-    public List<Film> getListFilms(){
-    return StreamSupport.stream(filmRepository.findAll().spliterator(), false)
-            .collect(Collectors.toList());
+
+    public List<Film> getListFilms() {
+        return filmRepository.findAll();
     }
-    
-    public Film getFilm(Long id){
-        try {
-            return filmRepository.findById(id).orElseThrow(()->
-                    new ClassNotFoundException());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+
+    public Film getFilm(Long id) {
+        Film film = new Film();
+        if (filmRepository.findById(id).isEmpty()) {
+            return film;
+        } else {
+            return filmRepository.findById(id).get();
         }
-        return null;
     }
-    
+
     @Transactional
-    public Film addActeurToFilm(Long filmId, Long acteurId){
+    public Film addActeurToFilm(Long filmId, Long acteurId) {
         Film film = getFilm(filmId);
         Acteur acteur = acteurService.getActeur(acteurId);
-     List<Acteur> acteurs = Arrays.asList(acteur);
+        List<Acteur> acteurs = Arrays.asList(acteur);
         film.setActeurs(acteurs);
-            return film;
+        return film;
     }
-    
+
 }

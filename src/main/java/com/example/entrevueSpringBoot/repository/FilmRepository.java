@@ -6,12 +6,13 @@
 package com.example.entrevueSpringBoot.repository;
 
 import com.example.entrevueSpringBoot.model.Film;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author RomaG
  */
-public interface FilmRepository extends CrudRepository<Film, Long> {
+public interface FilmRepository extends JpaRepository<Film, Long> {
     
 }

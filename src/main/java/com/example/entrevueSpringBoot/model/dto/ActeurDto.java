@@ -15,17 +15,18 @@ import lombok.Data;
  */
 @Data
 public class ActeurDto {
+
     private Long id;
     private String nom;
     private String prenom;
     private Film film;
-    
-    public static ActeurDto from(Acteur acteur){
-    ActeurDto acteurDto = new ActeurDto();
-    acteurDto.id = acteur.getId();
-    acteurDto.nom = acteur.getNom();
-    acteurDto.prenom = acteur.getPrenom();
-    return acteurDto;
+
+    public static ActeurDto from(Acteur acteur) {
+        ActeurDto acteurDto = new ActeurDto();
+        acteurDto.id = acteur.getId();
+        acteurDto.nom = acteur.getNom();
+        acteurDto.prenom = acteur.getPrenom();
+        return acteurDto;
     }
-    
+
 }
